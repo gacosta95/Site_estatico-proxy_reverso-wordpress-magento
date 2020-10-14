@@ -538,7 +538,7 @@ server {
 
 <p>Abaixo, temos uma topologia relacionada ao que foi feito: </p>
 <p align="center">
- <img src="imagens/topologia.PNG" width="600" title="topologia">
+ <img src="imagens/Topologia.PNG" width="600" title="topologia">
 </p>
 
 
