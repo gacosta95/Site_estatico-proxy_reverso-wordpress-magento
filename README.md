@@ -8,7 +8,7 @@
 <ol>
 
 <p>Após a criação do dominio.tk free na <a href="https://www.freenom.com/pt/index.html">Freenom</a> é necessário configurar o Route53 na aws e efetuar a criação dos subdomínios </p>
-<p>Veja mais informações sobre a instância na screen shot abaixo: </p>
+<p>Informações sobre a instância no screenshot abaixo: </p>
 <p align="center">
  <img src="imagens/neofetch.PNG" width="600" height="350" title="Neofetch">
 </p>
