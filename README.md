@@ -406,6 +406,53 @@ Agora vamos configurar o firewall para abrir a porta 8080 em nosso servidor
 sudo firewall-cmd --permanent --add-port=8080/tcp
 sudo firewall-cmd --reload
 ```
+<p>Vamos criar um Vhost para o tomcat no nginx</p>
+
+```
+vim /etc/nginx/conf.d/tomcat.conf
+upstream tomcat {
+ server 127.0.0.1:8080 weight=100 max_fails=5 fail_timeout=5;
+ }
+ 
+ server {
+ server_name reverse.alvestask.tk;
+ 
+ location / {
+ proxy_set_header X-Forwarded-Host $host;
+ proxy_set_header X-Forwarded-Server $host;
+ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+ proxy_pass http://tomcat/;
+ }
+ 
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/alvestask.tk/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/alvestask.tk/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+
+ 
+ server {
+    if ($host = reverse.alvestask.tk) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+ listen 80;
+ server_name reverse.alvestask.tk;
+    return 404; # managed by Certbot
+
+
+}
+```
+
+<p>Teste o Nginx e rode um restart caso a saida do teste seja sucess</p>
+
+<code>nginx -t</code>
+<code>systemctl restart nginx</code>
+
 <p>Por fim, vamos editar o arquivo tomcat-users.xml para liberar os usuários que são usados para acessar a interface de gerenciamento web do Tomcat</p>
 
 ```
