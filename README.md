@@ -451,6 +451,8 @@ upstream tomcat {
 <p>Teste o Nginx e rode um restart caso a saida do teste seja sucess</p>
 
 <code>nginx -t</code>
+
+<p>Restart</P>
 <code>systemctl restart nginx</code>
 
 <p>Por fim, vamos editar o arquivo tomcat-users.xml para liberar os usuários que são usados para acessar a interface de gerenciamento web do Tomcat</p>
